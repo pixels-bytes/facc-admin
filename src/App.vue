@@ -3,19 +3,21 @@
 
     <v-toolbar>
       <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-sm-and-up"></v-toolbar-side-icon>
-      <v-toolbar-title>FACC Admin</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">FACC Admin</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only" v-for="item in menuItems" :key="item.title">
-        <v-btn flat>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat v-for="item in menuItems" :key="item.title" router :to="item.link">
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-navigation-drawer v-model="drawer">
+    <v-navigation-drawer temporary v-model="drawer">
       <v-list>
-        <v-list-tile v-for="item in menuItems" :key="item.title ">
+        <v-list-tile v-for="item in menuItems" :key="item.title " router :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -36,11 +38,12 @@ export default {
     return {
       drawer: false,
       menuItems: [
-        { icon: 'restaurant', title: 'View Courses' },
-        { icon: 'person', title: 'Profile' },
-        { icon: 'face', title: 'Sign Up' },
-        { icon: 'lock_open', title: 'Login' }
-]
+        { icon: 'restaurant', title: 'View Courses', link: '/courses' },
+        { icon: 'room', title: 'Create Course', link: '/courses/new' },
+        { icon: 'person', title: 'Profile', link: '/profile' },
+        { icon: 'face', title: 'Sign Up', link: '/signup' },
+        { icon: 'lock_open', title: 'Signin', link: '/signin' }
+      ]
     };
   },
   name: 'App',
