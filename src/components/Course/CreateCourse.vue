@@ -7,7 +7,7 @@
     </v-layout>
     <v-layout row>
       <v-flex xs12>
-        <form>
+        <form @submit.prevent="onCreateCourse">
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
@@ -70,7 +70,11 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn class="primary" :disabled="!formIsValid">Create Course</v-btn>
+              <v-btn
+                class="primary"
+                :disabled="!formIsValid"
+                type="submit"
+              >Create Course</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -98,6 +102,22 @@ export default {
         this.location !== '' &&
         this.startDate !== '' &&
         this.endDate !== ''; 
+    }
+  },
+  methods: {
+    onCreateCourse () {
+      if (!this.formIsValid) {
+        return
+      }
+      const courseData = {
+        title: this.title,
+        category: this.category,
+        location: this.location,
+        startDate: this.startDate,
+        endDate: this.endDate,
+      };
+      this.$store.dispatch('createCourse', courseData); 
+      this.$router.push('/courses');
     }
   },
 }

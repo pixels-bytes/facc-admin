@@ -46,8 +46,22 @@ export const store = new Vuex.Store({
           id: 'sdsdfsdfsgeg'
         }
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+      createCourse (state, payload) {
+        state.courses.push(payload);
+      }
+    },
+    actions: {
+      createCourse ({ commit }, payload) {
+        const course = {
+          title: payload.title,
+          category: payload.category,
+          location: payload.location,
+          date: payload.startDate,
+        }
+        commit('createCourse', course);
+      }
+    },
     getters: {
       courses (state) {
         return state.courses.sort((courseA, courseB) => {
