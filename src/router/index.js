@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/Home';
 import Courses from '@/components/Course/Courses';
 import CreateCourse from '@/components/Course/CreateCourse';
 import Profile from '@/components/User/Profile';
@@ -11,11 +10,9 @@ import Signin from '@/components/User/Signin';
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
-      name: 'Home',
-      component: Home,
+      redirect: '/courses',
     },
     {
       path: '/courses',
