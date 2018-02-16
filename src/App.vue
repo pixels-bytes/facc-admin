@@ -49,8 +49,8 @@ export default {
         { icon: 'room', title: 'Create Course', link: '/courses/new' },
         { icon: 'person', title: 'Profile', link: '/profile' },
         { icon: 'face', title: 'Sign Up', link: '/signup' },
-        { icon: 'lock_open', title: 'Signin', link: '/signin' }
-      ]
+        { icon: 'lock_open', title: 'Signin', link: '/signin' },
+      ],
     };
   },
   name: 'App',

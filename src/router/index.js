@@ -20,28 +20,28 @@ export default new Router({
     {
       path: '/courses',
       name: 'Courses',
-      component: Courses
+      component: Courses,
     },
     {
       path: '/courses/new',
       name: 'CreateCourse',
-      component: CreateCourse
+      component: CreateCourse,
     },
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
     },
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup
+      component: Signup,
     },
     {
       path: '/signin',
       name: 'Signin',
-      component: Signin
-    }
+      component: Signin,
+    },
   ],
-  mode: 'history'
+  mode: 'history',
 });

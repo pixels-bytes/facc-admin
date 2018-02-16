@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import App from './App';
-import router from './router';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+
+import App from './App';
+import router from './router';
 
 Vue.use(Vuetify, {
   theme: {
@@ -12,8 +13,8 @@ Vue.use(Vuetify, {
     error: '#78909C',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107'
-  }
+    warning: '#FFC107',
+  },
 });
 
 Vue.config.productionTip = false;
