@@ -1,14 +1,18 @@
 <template>
-  <v-app dark>
+  <v-app>
 
-    <v-toolbar>
+    <v-toolbar class="primary" dark>
       <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-sm-and-up"></v-toolbar-side-icon>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">FACC Admin</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat v-for="item in menuItems" :key="item.title" router :to="item.link">
+        <v-btn
+          flat
+          v-for="item in menuItems" :key="item.title"
+          router :to="item.link"
+        >
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
@@ -17,7 +21,10 @@
 
     <v-navigation-drawer temporary v-model="drawer">
       <v-list>
-        <v-list-tile v-for="item in menuItems" :key="item.title " router :to="item.link">
+        <v-list-tile
+          v-for="item in menuItems" :key="item.title "
+          router :to="item.link"
+        >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
