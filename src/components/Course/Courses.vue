@@ -5,7 +5,12 @@
       <v-spacer></v-spacer>
       <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="items" :search="search">
+    <v-data-table
+      :headers="headers"
+      :items="courses"
+      :search="search"
+    >
+      <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.title }}</td>
         <td class="text-xs-right">{{ props.item.category }}</td>
@@ -31,47 +36,14 @@
           { text: 'Course Date', value: 'category' },
           { text: 'Location', value: 'location' },
         ],
-        items: [
-          { 
-            value: false,
-            title: 'Making Curries Rock',
-            category: 'Indian Cuisine',
-            location: 'India',
-            date: '2018-02-15'
-            },
-            { 
-              value: false,
-              title: 'Pizzas and Pastas',
-              category: 'Italian Cuisine',
-              location: 'Italy',
-              date: '2018-02-16'
-            },
-            { 
-              value: false,
-              title: 'Paella',
-              category: 'Spanish Cuisine',
-              location: 'Spain',
-              date: '2018-02-17'
-            },
-            { 
-              value: false,
-              title: 'Beyond Fish & Chips',
-              category: 'British Cuisine',
-              location: 'England',
-              date: '2018-02-18'
-            },
-            { 
-              value: false,
-              title: 'Sushi',
-              category: 'Japanese Cuisine',
-              location: 'Japan',
-              date: '2018-02-15'
-            }
-        ]
       }
-    }
+    },
+
+    computed: {
+      courses () {
+        return this.$store.getters.courses;
+      }
+    },
   }
 
 </script>
-
-

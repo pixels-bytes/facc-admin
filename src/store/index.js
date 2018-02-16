@@ -40,7 +40,7 @@ export const store = new Vuex.Store({
               category: 'Japanese Cuisine',
               location: 'Japan',
               date: '2018-02-15'
-            }
+            },
         ],
         user: {
           id: 'sdsdfsdfsgeg'
