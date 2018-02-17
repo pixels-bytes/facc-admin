@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      Courses
+      <h2>Course List</h2>
       <v-spacer></v-spacer>
       <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
@@ -10,8 +10,8 @@
       <template slot="items" slot-scope="props">
         <td>{{ props.item.title }}</td>
         <td>{{ props.item.category }}</td>
-        <td>{{ props.item.startDate }}</td>
-        <td>{{ props.item.endDate }}</td>
+        <td>{{ props.item.startDate | date }}</td>
+        <td>{{ props.item.endDate | date }}</td>
         <td>{{ props.item.location }}</td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
