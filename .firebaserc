@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "facc-admin",
+    "staging": "facc-admin-staging"
+  }
+}
