@@ -9,9 +9,10 @@
       <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.title }}</td>
-        <td class="text-xs-right">{{ props.item.category }}</td>
-        <td class="text-xs-right">{{ props.item.date }}</td>
-        <td class="text-xs-right">{{ props.item.location }}</td>
+        <td>{{ props.item.category }}</td>
+        <td>{{ props.item.startDate }}</td>
+        <td>{{ props.item.endDate }}</td>
+        <td>{{ props.item.location }}</td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
@@ -21,7 +22,6 @@
 </template>
 
 
-
 <script>
   export default {
     data () {
@@ -29,8 +29,9 @@
         search: '',
         headers: [
           { text: 'Course Title', value: 'title' },
-          { text: 'Category', value: 'date' },
-          { text: 'Course Date', value: 'category' },
+          { text: 'Category', value: 'category' },
+          { text: 'Start Date', value: 'startDate' },
+          { text: 'End Date', value: 'endDate' },
           { text: 'Location', value: 'location' },
         ],
       }

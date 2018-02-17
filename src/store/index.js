@@ -11,35 +11,40 @@ export const store = new Vuex.Store({
               title: 'Making Curries Rock',
               category: 'Indian Cuisine',
               location: 'India',
-              date: '2018-02-15'
+              startDate: '2018-02-15',
+              endDate: '2018-02-16',
             },
             { 
               id: 'sdftgsgstg',
               title: 'Pizzas and Pastas',
               category: 'Italian Cuisine',
               location: 'Italy',
-              date: '2018-02-16'
+              startDate: '2018-02-16',
+              endDate: '2018-02-17',
             },
             { 
               id: 'askgstnsks',
               title: 'Paella',
               category: 'Spanish Cuisine',
               location: 'Spain',
-              date: '2018-02-17'
+              startDate: '2018-02-17',
+              endDate: '2018-02-18',
             },
             { 
               id: 'awidj0f48ae',
               title: 'Beyond Fish & Chips',
               category: 'British Cuisine',
               location: 'England',
-              date: '2018-02-18'
+              startDate: '2018-02-18',
+              endDate: '2018-02-19',
             },
             { 
               id: 'dkm09jalmcljsnrv',
               title: 'Sushi',
               category: 'Japanese Cuisine',
               location: 'Japan',
-              date: '2018-02-15'
+              startDate: '2018-02-15',
+              endDate: '2018-02-18',
             },
         ],
         user: {
@@ -57,7 +62,8 @@ export const store = new Vuex.Store({
           title: payload.title,
           category: payload.category,
           location: payload.location,
-          date: payload.startDate,
+          startDate: payload.startDate,
+          endDate: payload.endDate,
         }
         commit('createCourse', course);
       }
@@ -65,7 +71,7 @@ export const store = new Vuex.Store({
     getters: {
       courses (state) {
         return state.courses.sort((courseA, courseB) => {
-          return courseA.date > courseB.date;
+          return courseA.startDate > courseB.startDate;
         });
       },
       course (state) {
