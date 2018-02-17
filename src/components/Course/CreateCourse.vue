@@ -8,73 +8,64 @@
     <v-layout row>
       <v-flex xs12>
         <form @submit.prevent="onCreateCourse">
+
+          <!-- Course Title -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-                name="title"
-                label="Title"
-                id="title"
-                v-model="title"
-                required
-              >
+              <v-text-field name="title" label="Title" id="title" v-model="title" required>
               </v-text-field>
             </v-flex>
           </v-layout>
+
+          <!-- Course Category -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-                name="category"
-                label="Category"
-                id="category"
-                v-model="category"
-                required
-              >
+              <v-text-field name="category" label="Category" id="category" v-model="category" required>
               </v-text-field>
             </v-flex>
           </v-layout>
+
+          <!-- Course Location -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-                name="location"
-                label="Location"
-                id="location"
-                v-model="location"
-                required
-              >
+              <v-text-field name="location" label="Location" id="location" v-model="location" required>
               </v-text-field>
             </v-flex>
           </v-layout>
+
+          <!-- Course Start Date -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-                name="start-date"
-                label="Start Date"
-                id="start-date"
-                v-model="startDate"
-                required
-              >
-              </v-text-field>
+              <v-dialog ref="dialog1" persistent v-model="modal" lazy full-width width="290px" :return-value.sync="startDate">
+                <v-text-field slot="activator" prepend-icon="event" label="Start Date" v-model="startDate" readonly></v-text-field>
+                <v-date-picker v-model="startDate" scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.dialog1.save(startDate)">OK</v-btn>
+                </v-date-picker>
+              </v-dialog>
             </v-flex>
           </v-layout>
+
+          <!-- Course End Date -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-                name="end-date"
-                label="End Date"
-                id="end-date"
-                v-model="endDate"
-                required
-              >
-              </v-text-field>
+              <v-dialog ref="dialog2" persistent v-model="modal" lazy full-width width="290px" :return-value.sync="endDate">
+                <v-text-field slot="activator" prepend-icon="event" label="End Date" v-model="endDate" readonly></v-text-field>
+                <v-date-picker v-model="endDate" scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.dialog2.save(endDate)">OK</v-btn>
+                </v-date-picker>
+              </v-dialog>
             </v-flex>
           </v-layout>
+
+
+          <!-- Submit Button -->
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn
-                class="primary"
-                :disabled="!formIsValid"
-                type="submit"
-              >Create Course</v-btn>
+              <v-btn class="primary" :disabled="!formIsValid" type="submit">Create Course</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -84,15 +75,17 @@
 </template>
 
 
+
 <script>
 export default {
-  data () {
+  data() {
     return {
       title: '',
       category: '',
       location: '',
       startDate: '',
       endDate: '',
+      modal: false,
     };
   },
   computed: {
@@ -101,13 +94,13 @@ export default {
         this.category !== '' &&
         this.location !== '' &&
         this.startDate !== '' &&
-        this.endDate !== ''; 
+        this.endDate !== '';
     }
   },
   methods: {
-    onCreateCourse () {
+    onCreateCourse() {
       if (!this.formIsValid) {
-        return
+        return;
       }
       const courseData = {
         title: this.title,
@@ -116,9 +109,9 @@ export default {
         startDate: this.startDate,
         endDate: this.endDate,
       };
-      this.$store.dispatch('createCourse', courseData); 
+      this.$store.dispatch('createCourse', courseData);
       this.$router.push('/courses');
     }
   },
-}
+};
 </script>
