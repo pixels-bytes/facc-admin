@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueFirestore from 'vue-firestore';
+import Firebase from '@firebase/app';
 import 'vuetify/dist/vuetify.min.css';
 
 import App from './App';
@@ -7,6 +9,8 @@ import router from './router';
 import { store } from './store'
 import DateFilter from './filters/date'
 
+
+Vue.use(VueFirestore);
 Vue.use(Vuetify, {
   theme: {
     primary: '#D32F2F',
@@ -19,6 +23,7 @@ Vue.use(Vuetify, {
   },
 });
 
+// turns off the 'You are running Vue in development mode.' msg
 Vue.config.productionTip = false;
 
 Vue.filter('date', DateFilter);
@@ -29,4 +34,13 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  created () {
+    Firebase.initializeApp({
+      apiKey: "AIzaSyBPKRCgjyXAiE9UgacTLe7-zcxGgJKlA5Q",
+      authDomain: "facc-admin.firebaseapp.com",
+      databaseURL: "https://facc-admin.firebaseio.com",
+      projectId: "facc-admin",
+      storageBucket: "facc-admin.appspot.com",
+    });
+  },
 });
