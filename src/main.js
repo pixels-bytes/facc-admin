@@ -7,7 +7,7 @@ import 'vuetify/dist/vuetify.min.css';
 
 import App from './App';
 import router from './router';
-import { store } from './store';
+import store from './store';
 import DateFilter from './filters/date';
 import AlertCmp from './components/Shared/Alert';
 import * as config from './config';
