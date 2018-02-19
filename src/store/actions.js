@@ -1,7 +1,9 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
+import '@firebase/firestore';
 
-export default {
+
+export default {  
   createCourse({ commit }, payload) {
     const course = {
       title: payload.title,
@@ -10,7 +12,13 @@ export default {
       startDate: payload.startDate,
       endDate: payload.endDate,
     };
-    commit('createCourse', course);
+    firebase.firestore().collection('courses').add(course)
+      .then(
+        commit('createCourse', course)
+      )
+      .catch(
+        (error) => console.log(error)
+      );
   },
   signUserUp({ commit }, payload) {
     commit('setLoading', true);
