@@ -51,9 +51,7 @@ export const store = new Vuex.Store({
         endDate: '2018-02-18',
       },
     ],
-    user: {
-      id: 'sdsdfsdfsgeg',
-    },
+    user: null,
   },
   getters,
   actions,

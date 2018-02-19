@@ -37,14 +37,27 @@ export default {
   data() {
     return {
       drawer: false,
-      menuItems: [
-        { icon: 'restaurant', title: 'View Courses', link: '/courses' },
-        { icon: 'room', title: 'Create Course', link: '/courses/new' },
-        { icon: 'person', title: 'Profile', link: '/profile' },
+    };
+  },
+  computed: {
+    menuItems() {
+      let menuItems = [
         { icon: 'face', title: 'Sign Up', link: '/signup' },
         { icon: 'lock_open', title: 'Signin', link: '/signin' },
-      ],
-    };
+      ];
+
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          { icon: 'restaurant', title: 'View Courses', link: '/courses' },
+          { icon: 'room', title: 'Create Course', link: '/courses/new' },
+          { icon: 'person', title: 'Profile', link: '/profile' },
+        ];
+      };
+      return menuItems;
+    },
+    userIsAuthenticated() {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined;
+    },
   },
   name: 'App',
 };
