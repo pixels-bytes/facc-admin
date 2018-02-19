@@ -28,5 +28,6 @@ new Vue({
   render: h => h(App),
   created() {
     Firebase.initializeApp(config.firebase);
+    this.$store.dispatch('loadCourses');
   },
 });

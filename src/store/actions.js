@@ -3,7 +3,25 @@ import '@firebase/auth';
 import '@firebase/firestore';
 
 
-export default {  
+export default {
+  loadCourses({ commit }) {
+    commit('setLoading', true);
+
+    firebase.firestore().collection('courses').get()
+      .then((snapshot) => {
+        const courses = [];
+        snapshot.forEach(doc => courses.push({
+          ...doc.data(),
+          id: doc.id
+        }));
+        commit('setLoadedCourses', courses);
+        commit('setLoading', false);
+      })
+      .catch((error) => {
+        console.log(error);
+        commit('setLoading', false);
+      });
+  },
   createCourse({ commit }, payload) {
     const course = {
       title: payload.title,
@@ -14,10 +32,16 @@ export default {
     };
     firebase.firestore().collection('courses').add(course)
       .then(
-        commit('createCourse', course)
+        (data) => {
+          const key = data.key;
+          commit('createCourse', {
+            ...course,
+            id: key,
+          });
+        },
       )
       .catch(
-        (error) => console.log(error)
+        error => console.log(error),
       );
   },
   signUserUp({ commit }, payload) {
