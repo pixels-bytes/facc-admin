@@ -12,15 +12,12 @@ export default {
         const courses = [];
         snapshot.forEach(doc => courses.push({
           ...doc.data(),
-          id: doc.id
+          id: doc.id,
         }));
         commit('setLoadedCourses', courses);
         commit('setLoading', false);
       })
-      .catch((error) => {
-        console.log(error);
-        commit('setLoading', false);
-      });
+      .catch(commit('setLoading', false));
   },
   createCourse({ commit, getters }, payload) {
     const course = {
@@ -42,7 +39,7 @@ export default {
         },
       )
       .catch(
-        error => console.log(error),
+        // Handle Error
       );
   },
   signUserUp({ commit }, payload) {

@@ -6,8 +6,6 @@ import Profile from '@/components/User/Profile';
 import Signup from '@/components/User/Signup';
 import Signin from '@/components/User/Signin';
 import AuthGuard from './auth-guard';
-import authGuard from './auth-guard';
-
 
 Vue.use(Router);
 
@@ -26,13 +24,13 @@ export default new Router({
       path: '/courses/new',
       name: 'CreateCourse',
       component: CreateCourse,
-      beforeEnter: AuthGuard, 
+      beforeEnter: AuthGuard,
     },
     {
       path: '/profile',
       name: 'Profile',
       component: Profile,
-      beforeEnter: authGuard,
+      beforeEnter: AuthGuard,
     },
     {
       path: '/signup',

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueFirestore from 'vue-firestore';
 import Firebase from '@firebase/app';
-import '@firebase/app';
+import '@firebase/auth';
 import 'vuetify/dist/vuetify.min.css';
 
 import App from './App';
