@@ -26,7 +26,7 @@ export default {
     )
     .catch(
       (error) => {
-        console.log(error);
+        // Handle Errors
       },
     );
   },
@@ -44,7 +44,7 @@ export default {
     )
     .catch(
       (error) => {
-        console.log(error);
+        // Handle Errors
       },
     );
   },

@@ -66,7 +66,7 @@
         if (value !== null && value !== undefined) {
           this.$router.push('/');
         }
-      }
+      },
     },
     methods: {
       onSignup() {

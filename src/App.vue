@@ -52,7 +52,7 @@ export default {
           { icon: 'room', title: 'Create Course', link: '/courses/new' },
           { icon: 'person', title: 'Profile', link: '/profile' },
         ];
-      };
+      }
       return menuItems;
     },
     userIsAuthenticated() {
