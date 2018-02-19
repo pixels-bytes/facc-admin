@@ -22,13 +22,14 @@ export default {
         commit('setLoading', false);
       });
   },
-  createCourse({ commit }, payload) {
+  createCourse({ commit, getters }, payload) {
     const course = {
       title: payload.title,
       category: payload.category,
       location: payload.location,
       startDate: payload.startDate,
       endDate: payload.endDate,
+      userId: getters.user.id,
     };
     firebase.firestore().collection('courses').add(course)
       .then(
