@@ -8,12 +8,22 @@
     <v-data-table :headers="headers" :items="courses" :search="search" :loading="loading">
       <v-progress-linear slot="progress" color="primary" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.title }}</td>
-        <td>{{ props.item.category }}</td>
-        <td>{{ props.item.startDate | date }}</td>
-        <td>{{ props.item.endDate | date }}</td>
-        <td>{{ props.item.location }}</td>
+        <tr @click="props.expanded = !props.expanded">
+          <td>{{ props.item.title }}</td>
+          <td>{{ props.item.category }}</td>
+          <td>{{ props.item.startDate | date }}</td>
+          <td>{{ props.item.endDate | date }}</td>
+          <td>{{ props.item.location }}</td>
+        </tr>
       </template>
+      <template slot="expand" slot-scope="props">
+      <v-card flat>
+        <v-card-text>
+          <v-btn flat color="primary">Edit</v-btn>
+          <v-btn flat color="primary">Delete</v-btn>
+        </v-card-text>
+      </v-card>
+    </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
       </v-alert>
