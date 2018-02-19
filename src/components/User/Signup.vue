@@ -5,7 +5,7 @@
         <v-card>
           <v-card-text>
             <v-container>
-              <form>
+              <form @submit.prevent="onSignup">
 
                 <!-- Email -->
                 <v-layout row>
@@ -46,25 +46,24 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         email: '',
         password: '',
         confirmPassword: '',
-      }
+      };
     },
     computed: {
-      comparePasswords () {
-        return this.password !== this.confirmPassword ? 'Passwords do not match' : ''; 
-      }
+      comparePasswords() {
+        return this.password !== this.confirmPassword ? 'Passwords do not match' : '';
+      },
     },
     methods: {
-      onSignup () {
-        // Vuex
-        console.log({ email: this.email, password: this.password, confirmPassword: this.confirmPassword })
-      }
+      onSignup() {
+        this.$store.dispatch('signUserUp', { email: this.email, password: this.password });
+      },
     },
-  }
+  };
 </script>
 
 <style scoped>

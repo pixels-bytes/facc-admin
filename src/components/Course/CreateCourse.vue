@@ -95,7 +95,7 @@ export default {
         this.location !== '' &&
         this.startDate !== '' &&
         this.endDate !== '';
-    }
+    },
   },
   methods: {
     onCreateCourse() {
@@ -111,7 +111,7 @@ export default {
       };
       this.$store.dispatch('createCourse', courseData);
       this.$router.push('/courses');
-    }
+    },
   },
 };
 </script>

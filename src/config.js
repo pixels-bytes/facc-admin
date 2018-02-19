@@ -7,13 +7,13 @@ export const vuetify = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FFC107',
-  }
+  },
 };
 
 export const firebase = {
-  apiKey: "AIzaSyBPKRCgjyXAiE9UgacTLe7-zcxGgJKlA5Q",
-  authDomain: "facc-admin.firebaseapp.com",
-  databaseURL: "https://facc-admin.firebaseio.com",
-  projectId: "facc-admin",
-  storageBucket: "facc-admin.appspot.com",
+  apiKey: 'AIzaSyBPKRCgjyXAiE9UgacTLe7-zcxGgJKlA5Q',
+  authDomain: 'facc-admin.firebaseapp.com',
+  databaseURL: 'https://facc-admin.firebaseio.com',
+  projectId: 'facc-admin',
+  storageBucket: 'facc-admin.appspot.com',
 };

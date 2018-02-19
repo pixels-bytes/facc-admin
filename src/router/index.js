@@ -10,7 +10,8 @@ import Signin from '@/components/User/Signin';
 Vue.use(Router);
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/',
       redirect: '/courses',
     },

@@ -24,7 +24,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         search: '',
         headers: [
@@ -34,13 +34,13 @@
           { text: 'End Date', value: 'endDate' },
           { text: 'Location', value: 'location' },
         ],
-      }
+      };
     },
 
     computed: {
-      courses () {
+      courses() {
         return this.$store.getters.courses;
-      }
+      },
     },
-  }
+  };
 </script>
