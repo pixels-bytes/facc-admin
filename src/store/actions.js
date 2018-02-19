@@ -2,7 +2,6 @@ import firebase from '@firebase/app';
 import '@firebase/auth';
 import '@firebase/firestore';
 
-
 export default {
   loadCourses({ commit }) {
     commit('setLoading', true);
@@ -16,8 +15,7 @@ export default {
         }));
         commit('setLoadedCourses', courses);
         commit('setLoading', false);
-      })
-      .catch(commit('setLoading', false));
+      }); // Handle errors with .catch()
   },
   createCourse({ commit, getters }, payload) {
     const course = {
