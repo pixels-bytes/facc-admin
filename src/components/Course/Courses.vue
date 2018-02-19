@@ -5,8 +5,8 @@
       <v-spacer></v-spacer>
       <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="courses" :search="search">
-      <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+    <v-data-table :headers="headers" :items="courses" :search="search" :loading="loading">
+      <v-progress-linear slot="progress" color="primary" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.title }}</td>
         <td>{{ props.item.category }}</td>
@@ -40,6 +40,9 @@
     computed: {
       courses() {
         return this.$store.getters.courses;
+      },
+      loading() {
+        return this.$store.getters.loading;
       },
     },
   };
