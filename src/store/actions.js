@@ -13,11 +13,15 @@ export default {
     commit('createCourse', course);
   },
   signUserUp({ commit }, payload) {
+    commit('setLoading', true);
+    commit('clearError');
+
     firebase
     .auth()
     .createUserWithEmailAndPassword(payload.email, payload.password)
     .then(
       (user) => {
+        commit('setLoading', false);
         const newUser = {
           id: user.uid,
         };
@@ -26,16 +30,22 @@ export default {
     )
     .catch(
       (error) => {
+        commit('setLoading', false);
+        commit('setError', error);
         // Handle Errors
       },
     );
   },
   signUserIn({ commit }, payload) {
+    commit('setLoading', true);
+    commit('clearError');
+
     firebase
     .auth()
     .signInWithEmailAndPassword(payload.email, payload.password)
     .then(
       (user) => {
+        commit('setLoading', false);
         const newUser = {
           id: user.uid,
         };
@@ -44,8 +54,13 @@ export default {
     )
     .catch(
       (error) => {
+        commit('setLoading', false);
+        commit('setError', error);
         // Handle Errors
       },
     );
+  },
+  clearError({ commit }) {
+    commit('clearError');
   },
 };

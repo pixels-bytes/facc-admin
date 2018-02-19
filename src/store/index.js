@@ -52,6 +52,8 @@ export const store = new Vuex.Store({
       },
     ],
     user: null,
+    loading: false,
+    error: null,
   },
   getters,
   actions,

@@ -8,6 +8,7 @@ import App from './App';
 import router from './router';
 import { store } from './store';
 import DateFilter from './filters/date';
+import AlertCmp from './components/Shared/Alert';
 import * as config from './config';
 
 Vue.use(VueFirestore);
@@ -17,6 +18,7 @@ Vue.use(Vuetify, config.vuetify);
 Vue.config.productionTip = false;
 
 Vue.filter('date', DateFilter);
+Vue.component('app-alert', AlertCmp);
 
 /* eslint-disable no-new */
 new Vue({
