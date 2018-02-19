@@ -92,6 +92,9 @@ export default {
       },
     );
   },
+  autoSignIn({ commit }, payload) {
+    commit('setUser', { id: payload.uid });
+  },
   clearError({ commit }) {
     commit('clearError');
   },

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueFirestore from 'vue-firestore';
 import Firebase from '@firebase/app';
+import '@firebase/app';
 import 'vuetify/dist/vuetify.min.css';
 
 import App from './App';
@@ -28,6 +29,11 @@ new Vue({
   render: h => h(App),
   created() {
     Firebase.initializeApp(config.firebase);
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user);
+      }
+    });
     this.$store.dispatch('loadCourses');
   },
 });
