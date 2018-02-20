@@ -6,7 +6,7 @@
 
       <!-- Toolbar Title -->
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">FACC Admin</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer">Find a Cookery Course</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
