@@ -1,5 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
+import router from './../router';
 
 export default {
   state: {
@@ -68,8 +69,12 @@ export default {
       commit('setUser', { id: payload.uid });
     },
     logout({ commit }) {
-      firebase.auth().signOut();
-      commit('setUser', null);
+      firebase.auth().signOut()
+        .then(() => {
+          commit('setUser', null);
+          router.push('/signin');
+        },
+      );
     },
   },
 };
