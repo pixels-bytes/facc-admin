@@ -1,22 +1,18 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
+import courses from './courses';
+import users from './users';
+import shared from './shared';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
-    courses: [],
-    user: null,
-    loading: false,
-    error: null,
+  modules: {
+    courses,
+    users,
+    shared,
   },
-  getters,
-  actions,
-  mutations,
 });
 
 export default store;
