@@ -19,6 +19,7 @@ export default new Router({
       path: '/courses',
       name: 'Courses',
       component: Courses,
+      beforeEnter: AuthGuard,
     },
     {
       path: '/courses/new',
