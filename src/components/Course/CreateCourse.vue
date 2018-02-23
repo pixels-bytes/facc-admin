@@ -109,8 +109,8 @@ export default {
         startDate: this.startDate,
         endDate: this.endDate,
       };
-      this.$store.dispatch('createCourse', courseData);
-      this.$router.push('/courses');
+      this.$store.dispatch('createCourse', courseData)
+        .then(this.$router.push('/courses'));
     },
   },
 };

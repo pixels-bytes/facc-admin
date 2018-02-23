@@ -24,6 +24,9 @@ export default {
     createCourse(state, payload) {
       state.courses.push(payload);
     },
+    deleteCourse(state, payload) {
+      state.courses = state.courses.filter(course => course.id !== payload);
+    },
   },
   actions: {
     loadCourses({ commit }) {
@@ -51,13 +54,23 @@ export default {
       };
       firebase.firestore().collection('courses').add(course)
         .then(
-          (data) => {
-            const key = data.key;
+          (ref) => {
+            // const key = ref.key;
+            const key = ref._key.path.segments[1];
             commit('createCourse', {
               ...course,
               id: key,
             });
           },
+        )
+        .catch(
+          // Handle Error
+        );
+    },
+    deleteCourse({ commit }, payload) {
+      firebase.firestore().collection('courses').doc(payload).delete()
+        .then(
+          commit('deleteCourse', payload),
         )
         .catch(
           // Handle Error
