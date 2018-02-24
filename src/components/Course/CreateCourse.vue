@@ -77,41 +77,41 @@
 
 
 <script>
-export default {
-  data() {
-    return {
-      title: '',
-      category: '',
-      location: '',
-      startDate: '',
-      endDate: '',
-      modal: false,
-    };
-  },
-  computed: {
-    formIsValid() {
-      return this.title !== '' &&
-        this.category !== '' &&
-        this.location !== '' &&
-        this.startDate !== '' &&
-        this.endDate !== '';
-    },
-  },
-  methods: {
-    onCreateCourse() {
-      if (!this.formIsValid) {
-        return;
-      }
-      const courseData = {
-        title: this.title,
-        category: this.category,
-        location: this.location,
-        startDate: this.startDate,
-        endDate: this.endDate,
+  export default {
+    data() {
+      return {
+        title: '',
+        category: '',
+        location: '',
+        startDate: '',
+        endDate: '',
+        modal: false,
       };
-      this.$store.dispatch('createCourse', courseData)
-        .then(this.$router.push('/courses'));
     },
-  },
-};
+    computed: {
+      formIsValid() {
+        return this.title !== '' &&
+          this.category !== '' &&
+          this.location !== '' &&
+          this.startDate !== '' &&
+          this.endDate !== '';
+      },
+    },
+    methods: {
+      onCreateCourse() {
+        if (!this.formIsValid) {
+          return;
+        }
+        const courseData = {
+          title: this.title,
+          category: this.category,
+          location: this.location,
+          startDate: this.startDate,
+          endDate: this.endDate,
+        };
+        this.$store.dispatch('createCourse', courseData)
+          .then(this.$router.push('/courses'));
+      },
+    },
+  };
 </script>

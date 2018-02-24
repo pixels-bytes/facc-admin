@@ -10,10 +10,11 @@ import router from './router';
 import store from './store';
 import DateFilter from './filters/date';
 import AlertCmp from './components/Shared/Alert';
-import * as config from './config';
+import theme from './config/theme';
+import './firebase/firebaseInit';
 
 Vue.use(VueFirestore);
-Vue.use(Vuetify, config.vuetify);
+Vue.use(Vuetify, theme);
 
 // turns off the 'You are running Vue in development mode.' msg
 Vue.config.productionTip = false;
@@ -28,7 +29,6 @@ new Vue({
   store,
   render: h => h(App),
   created() {
-    Firebase.initializeApp(config.firebase);
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user);
