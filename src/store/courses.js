@@ -1,5 +1,4 @@
-import firebase from '@firebase/app';
-import '@firebase/firestore';
+import db from '@/firebase/firebaseInit';
 
 export default {
   state: {
@@ -32,7 +31,7 @@ export default {
     loadCourses({ commit }) {
       commit('setLoading', true);
 
-      firebase.firestore().collection('courses').get()
+      db.collection('courses').get()
         .then((snapshot) => {
           const courses = [];
           snapshot.forEach(doc => courses.push({
@@ -52,10 +51,11 @@ export default {
         endDate: payload.endDate,
         userId: getters.user.id,
       };
-      firebase.firestore().collection('courses').add(course)
+      db.collection('courses').add(course)
         .then(
           (ref) => {
             // const key = ref.key;
+            // FIXME: resolve error with ref.key
             const key = ref._key.path.segments[1];
             commit('createCourse', {
               ...course,
@@ -68,7 +68,7 @@ export default {
         );
     },
     deleteCourse({ commit }, payload) {
-      firebase.firestore().collection('courses').doc(payload).delete()
+      db.collection('courses').doc(payload).delete()
         .then(
           commit('deleteCourse', payload),
         )

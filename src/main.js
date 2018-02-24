@@ -5,23 +5,22 @@ import Vue from 'vue';
 import Firebase from '@firebase/app';
 import VueFirestore from 'vue-firestore';
 import '@firebase/auth';
+import '@/firebase/firebaseInit';
 
 /* Vuetify */
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
 /* App */
-import App from './App';
-import router from './router';
-import store from './store';
+import App from '@/App';
+import router from '@/router';
+import store from '@/store';
 
 /* Shared */
-import DateFilter from './filters/date';
-import AlertCmp from './components/Shared/Alert';
+import DateFilter from '@/filters/date';
+import AlertCmp from '@/components/Shared/Alert';
+import theme from '@/config/theme';
 
-/* Config */
-import './firebase/firebaseInit';
-import theme from './config/theme';
 
 /* Wireup Middleware */
 Vue.use(VueFirestore);

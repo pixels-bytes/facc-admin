@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    
+
     <!-- Error Widget -->
     <v-layout row v-if="error">
       <v-flex xs12 sm6 offset-sm3>
@@ -86,7 +86,3 @@
     },
   };
 </script>
-
-<style scoped>
-  
-</style>
