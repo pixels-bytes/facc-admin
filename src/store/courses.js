@@ -54,9 +54,7 @@ export default {
       db.collection('courses').add(course)
         .then(
           (ref) => {
-            // const key = ref.key;
-            // FIXME: resolve error with ref.key
-            const key = ref._key.path.segments[1];
+            const key = ref.id;
             commit('createCourse', {
               ...course,
               id: key,
