@@ -3,9 +3,19 @@
 
     <!-- Main Title & Search -->
     <v-card-title>
-      <h2>Course List</h2>
-      <v-spacer></v-spacer>
-      <v-text-field append-icon="search" label="Filter Courses" single-line hide-details v-model="search"></v-text-field>
+      <v-layout row>
+        <v-flex xs6>
+          <h2>Course List</h2>
+        </v-flex>
+        <v-flex xs1 mt-3>
+          <app-info :heading="filterHeading" :text="filterInfo"></app-info>
+        </v-flex>
+        <v-flex xs5>
+          <v-text-field append-icon="search" label="Filter Courses" single-line hide-details v-model="search"></v-text-field>
+        </v-flex>
+      </v-layout>
+
+
     </v-card-title><!-- main title & search-->
 
     <!-- Popup Dialog -->
@@ -75,7 +85,7 @@
                 </v-dialog>
               </v-flex>
             </v-layout><!-- dialog course end date -->
-      
+
           </v-container>
         </v-card-text><!-- dialog content -->
 
@@ -85,10 +95,13 @@
           <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
           <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
         </v-card-actions><!-- dialog buttons -->
-      
+
       </v-card>
     </v-dialog><!-- popup dialog -->
 
+    OR
+
+    <upload-button class="primary" title="CSV Upload" :selectedCallback="onCsvUpload"></upload-button>
 
     <!-- Date Table -->
     <v-data-table :headers="headers" :items="courses" :search="search" :loading="loading">
@@ -129,6 +142,8 @@
 
 
 <script>
+  import neatCsv from 'neat-csv';
+
   export default {
     data() {
       return {
@@ -140,6 +155,8 @@
           { text: 'End Date', value: 'endDate' },
           { text: 'Location', value: 'location' },
         ],
+        filterHeading: 'Filtering Courses',
+        filterInfo: 'Type to dynamically filter course titles, locations, categories, as well as dates. For dates use numbers (e.g. - 03 for March & 03-08 for 8th of March)',
         editedItem: {},
         dialog: false,
         modal: false,
@@ -165,6 +182,22 @@
       },
       deleteCourse(id) {
         this.$store.dispatch('deleteCourse', id);
+      },
+      onCsvUpload(file) {
+        // TODO: Trim spaces in incoming file
+        // TODO: Checks
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => {
+          neatCsv(reader.result).then(
+            (courses) => {
+              courses.forEach((course) => {
+                this.$store.dispatch('createCourse', course);
+              });
+              this.$router.push('/courses');
+            },
+          );
+        };
       },
     },
   };

@@ -19,6 +19,7 @@ import store from '@/store';
 /* Shared */
 import DateFilter from '@/filters/date';
 import AlertCmp from '@/components/Shared/Alert';
+import InfoCmp from '@/components/Shared/Info';
 import UploadButton from '@/components/Shared/UploadButton';
 import theme from '@/config/theme';
 
@@ -28,6 +29,7 @@ Vue.use(VueFirestore);
 Vue.use(Vuetify, theme);
 Vue.filter('date', DateFilter);
 Vue.component('app-alert', AlertCmp);
+Vue.component('app-info', InfoCmp);
 Vue.component('upload-button', UploadButton);
 
 // turns off the 'You are running Vue in development mode.' msg
