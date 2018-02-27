@@ -7,5 +7,7 @@
 			"path": "src"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"todo-tree.flat": true
+	}
 }

@@ -69,6 +69,11 @@
             </v-flex>
           </v-layout>
         </form>
+        <v-layout>
+          <v-flex xs12 sm6 offset-sm3>
+            <upload-button class="primary" title="CSV Upload" :selectedCallback="onCsvUpload"></upload-button>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -77,6 +82,8 @@
 
 
 <script>
+  import neatCsv from 'neat-csv';
+
   export default {
     data() {
       return {
@@ -111,6 +118,22 @@
         };
         this.$store.dispatch('createCourse', courseData)
           .then(this.$router.push('/courses'));
+      },
+      onCsvUpload(file) {
+        // TODO: Trim spaces in incoming file
+        // TODO: Checks
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => {
+          neatCsv(reader.result).then(
+            (courses) => {
+              courses.forEach((course) => {
+                this.$store.dispatch('createCourse', course);
+              });
+              this.$router.push('/courses');
+            },
+          );
+        };
       },
     },
   };
