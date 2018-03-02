@@ -3,7 +3,6 @@ import Router from 'vue-router';
 
 // Components
 import Courses from '@/components/Course/Courses';
-import CreateCourse from '@/components/Course/CreateCourse';
 import Profile from '@/components/User/Profile';
 import Signup from '@/components/User/Signup';
 import Signin from '@/components/User/Signin';
@@ -24,12 +23,6 @@ export default new Router({
       path: '/courses',
       name: 'Courses',
       component: Courses,
-      beforeEnter: AuthGuard,
-    },
-    {
-      path: '/courses/new',
-      name: 'CreateCourse',
-      component: CreateCourse,
       beforeEnter: AuthGuard,
     },
     {

@@ -70,7 +70,6 @@ export default {
       if (this.userIsAuthenticated) {
         menuItems = [
           { icon: 'restaurant', title: 'View Courses', link: '/courses' },
-          { icon: 'room', title: 'Create Course', link: '/courses/new' },
           { icon: 'person', title: 'Profile', link: '/profile' },
         ];
       }
