@@ -15,6 +15,20 @@
             <v-container>
               <form @submit.prevent="onSignup">
 
+                <!-- First Name -->
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field name="firstName" label="First Name" id="first-name" v-model="firstName" type="text" required></v-text-field>
+                  </v-flex>
+                </v-layout>
+
+                <!-- Last Name -->
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field name="lastName" label="Last Name" id="last-name" v-model="lastName" type="text" required></v-text-field>
+                  </v-flex>
+                </v-layout>
+
                 <!-- Email -->
                 <v-layout row>
                   <v-flex xs12>
@@ -61,6 +75,8 @@
   export default {
     data() {
       return {
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         confirmPassword: '',
