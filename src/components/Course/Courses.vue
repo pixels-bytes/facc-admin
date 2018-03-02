@@ -43,8 +43,13 @@
       <template slot="expand" slot-scope="props">
         <v-card flat>
           <v-card-text>
-            <v-btn flat color="primary">Edit</v-btn>
-            <v-btn flat color="primary" @click.native="deleteCourse(props.item.id)">Delete</v-btn>
+            <!-- <v-btn flat color="primary" @click.native="deleteCourse(props.item.id)">Delete</v-btn> -->
+            <app-confirm
+              button="Delete"
+              headline="Are you sure you want to delete this course?"
+              text="By confirming, your course data will be lost forever"
+              @agreed="deleteCourse(props.item.id)">
+            </app-confirm>
           </v-card-text>
         </v-card>
       </template><!-- data table item buttons -->

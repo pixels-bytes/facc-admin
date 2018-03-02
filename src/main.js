@@ -36,11 +36,13 @@ import AlertCmp from '@/components/Shared/Alert';
 import InfoCmp from '@/components/Shared/Info';
 import UploadButton from '@/components/Shared/UploadButton';
 import CourseDialog from '@/components/Course/CourseDialog';
+import ConfirmCmp from '@/components/Shared/Confirm';
 
 
 /* Add Components */
 Vue.component('app-alert', AlertCmp);
 Vue.component('app-info', InfoCmp);
+Vue.component('app-confirm', ConfirmCmp);
 Vue.component('upload-button', UploadButton);
 Vue.component('course-dialog', CourseDialog);
 
