@@ -5,6 +5,10 @@
 		},
 		{
 			"path": "src"
+		},
+		{
+			"path": "functions"
 		}
 	],
+	"settings": {}
 }
