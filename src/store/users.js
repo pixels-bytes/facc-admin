@@ -28,10 +28,15 @@ export default {
       .then(
         (user) => {
           commit('setLoading', false);
-          const newUser = {
-            id: user.uid,
-          };
-          commit('setUser', newUser);
+
+          user.updateProfile({
+            displayName: `${payload.firstName} ${payload.lastName}`,
+          });
+
+          // If there's merit in creating a user collection:
+          // db.collection('users').doc(user.uid).set(newUserObj);
+
+          commit('setUser', user.uid);
         },
       )
       .catch(
@@ -52,6 +57,7 @@ export default {
       .then(
         (user) => {
           commit('setLoading', false);
+
           const newUser = {
             id: user.uid,
           };
