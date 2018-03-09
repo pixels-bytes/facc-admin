@@ -1,6 +1,7 @@
 import firebase from '@firebase/app';
 import '@firebase/auth';
 import router from '@/router';
+import db from '@/firebase/firebaseInit';
 
 
 export default {
@@ -18,7 +19,7 @@ export default {
     },
   },
   actions: {
-    signUserUp({ commit }, payload) {
+    signUserUp({ commit, dispatch }, payload) {
       commit('setLoading', true);
       commit('clearError');
 
@@ -29,14 +30,28 @@ export default {
         (user) => {
           commit('setLoading', false);
 
-          user.updateProfile({
-            displayName: `${payload.firstName} ${payload.lastName}`,
+          const displayName = payload.displayName ? payload.displayName : `${payload.firstName} ${payload.lastName}`;
+
+          const newUser = {
+            id: user.uid,
+            firstName: payload.firstName,
+            lastName: payload.lastName,
+            displayName,
+            email: payload.email,
+          };
+
+          // Update Firebase and Firestore
+          db
+          .collection('users')
+          .doc(user.uid)
+          .set({
+            firstName: payload.firstName,
+            lastName: payload.lastName,
           });
 
-          // If there's merit in creating a user collection:
-          // db.collection('users').doc(user.uid).set(newUserObj);
-
-          commit('setUser', user.uid);
+          user
+          .updateProfile({ displayName })
+          .then(() => commit('setUser', newUser));
         },
       )
       .catch(
@@ -58,10 +73,21 @@ export default {
         (user) => {
           commit('setLoading', false);
 
-          const newUser = {
+          const signedInUser = {
             id: user.uid,
+            displayName: user.displayName,
+            email: user.email,
           };
-          commit('setUser', newUser);
+
+          db
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            signedInUser.firstName = doc.data().firstName;
+            signedInUser.lastName = doc.data().lastName;
+          })
+          .then(() => commit('setUser', signedInUser));
         },
       )
       .catch(
@@ -73,7 +99,13 @@ export default {
       );
     },
     autoSignIn({ commit }, payload) {
-      commit('setUser', { id: payload.uid });
+      commit('setUser', {
+        id: payload.uid,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        displayName: payload.displayName,
+        email: payload.email,
+      });
     },
     logout({ commit }) {
       firebase.auth().signOut()

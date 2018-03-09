@@ -29,6 +29,13 @@
                   </v-flex>
                 </v-layout>
 
+                <!-- Display Name -->
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field name="displayName" label="Screen Name" id="display-name" v-model="displayName" type="text" ></v-text-field>
+                  </v-flex>
+                </v-layout>
+
                 <!-- Email -->
                 <v-layout row>
                   <v-flex xs12>
@@ -77,6 +84,7 @@
       return {
         firstName: '',
         lastName: '',
+        displayName: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -108,6 +116,7 @@
         this.$store.dispatch('signUserUp', {
           firstName: this.firstName,
           lastName: this.lastName,
+          displayName: this.displayName,
           email: this.email,
           password: this.password,
         });
