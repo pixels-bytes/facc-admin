@@ -8,13 +8,9 @@ export default {
     courses(state) {
       return state.courses.sort((courseA, courseB) => courseA.startDate > courseB.startDate);
     },
-    // course(state) {
-    //   return (courseId) => {
-    //     return state.courses.find((courseId) => {
-    //       return course.id === courseId;
-    //     });
-    //   };
-    // },
+    course(state) {
+      return id => state.courses.find(obj => obj.id === id);
+    },
   },
   mutations: {
     setLoadedCourses(state, payload) {
@@ -31,16 +27,18 @@ export default {
     loadCourses({ commit }) {
       commit('setLoading', true);
 
-      db.collection('courses').get()
-        .then((snapshot) => {
-          const courses = [];
-          snapshot.forEach(doc => courses.push({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          commit('setLoadedCourses', courses);
-          commit('setLoading', false);
-        }); // Handle errors with .catch()
+      db
+      .collection('courses').get()
+      .then((snapshot) => {
+        const courses = [];
+        snapshot.forEach(doc => courses.push({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        commit('setLoadedCourses', courses);
+        commit('setLoading', false);
+      }); // Handle errors with .catch()
     },
     createCourse({ commit, getters }, payload) {
       const course = {
@@ -51,28 +49,37 @@ export default {
         endDate: payload.endDate,
         userId: getters.user.id,
       };
-      db.collection('courses').add(course)
-        .then(
-          (ref) => {
-            const key = ref.id;
-            commit('createCourse', {
-              ...course,
-              id: key,
-            });
-          },
-        )
-        .catch(
-          // Handle Error
-        );
+      db
+      .collection('courses').add(course)
+      .then(
+        (ref) => {
+          const key = ref.id;
+          commit('createCourse', {
+            ...course,
+            id: key,
+          });
+        },
+      )
+      .catch(
+        // Handle Error
+      );
+    },
+    updateCourse({ commit, getters }, payload) {
+      const fetchedCourse = getters.course(payload.id);
+      const updatedCourse = { ...fetchedCourse, ...payload };
+      // update firestore here
+      commit('deleteCourse', payload.id);
+      commit('createCourse', updatedCourse);
     },
     deleteCourse({ commit }, payload) {
-      db.collection('courses').doc(payload).delete()
-        .then(
-          commit('deleteCourse', payload),
-        )
-        .catch(
-          // Handle Error
-        );
+      db
+      .collection('courses')
+      .doc(payload)
+      .delete()
+      .then(commit('deleteCourse', payload))
+      .catch(
+        // Handle Error
+      );
     },
   },
 };

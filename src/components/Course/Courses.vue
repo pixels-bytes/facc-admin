@@ -11,7 +11,13 @@
           <app-info :heading="filterHeading" :text="filterInfo"></app-info>
         </v-flex>
         <v-flex xs5>
-          <v-text-field append-icon="search" label="Filter Courses" single-line hide-details v-model="search"></v-text-field>
+          <v-text-field
+            append-icon="search"
+            label="Filter Courses"
+            single-line
+            hide-details
+            v-model="search"
+          ></v-text-field>
         </v-flex>
       </v-layout>
     </v-card-title><!-- main title & search-->
@@ -19,25 +25,54 @@
     <v-card-actions>
       <course-dialog @courseSaved="onCreateCourse"></course-dialog>
 
-      <upload-button class="primary" title="CSV Upload" :selectedCallback="onCsvUpload"></upload-button>
+      <upload-button
+        class="primary"
+        title="CSV Upload"
+        :selectedCallback="onCsvUpload"
+      ></upload-button>
     </v-card-actions>
 
     <!-- Date Table -->
-    <v-data-table :headers="headers" :items="courses" :search="search" :loading="loading" no-data-text="No Courses Available">
+    <v-data-table
+      :headers="headers"
+      :items="localCopy"
+      :search="search"
+      :loading="loading"
+      no-data-text="No Courses Available"
+    >
 
       <!-- Progress Bar -->
-      <v-progress-linear slot="progress" color="primary" indeterminate></v-progress-linear>
+      <v-progress-linear
+        slot="progress"
+        color="primary"
+        indeterminate
+      ></v-progress-linear>
 
       <!-- Data Table Items -->
       <template slot="items" slot-scope="props">
         <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.title }}</td>
+          <td>
+            <v-edit-dialog :return-value.sync="props.item.title" lazy>
+              {{ props.item.title }}
+              <v-text-field
+                single-line
+                counter
+                slot="input"
+                label="Enter New Course Title"
+                v-model="props.item.title"
+                :rules="[max25chars]"
+                @keyup.enter="onUpdateCourse({ id: props.item.id, title: props.item.title}), props.expanded = !props.expanded"
+              ></v-text-field>
+            </v-edit-dialog>
+          </td>
+
           <td>{{ props.item.category }}</td>
           <td>{{ props.item.startDate | date }}</td>
           <td>{{ props.item.endDate | date }}</td>
           <td>{{ props.item.location }}</td>
         </tr>
       </template><!-- data table items -->
+
 
       <!-- Data Table Item Buttons -->
       <template slot="expand" slot-scope="props">
@@ -55,7 +90,12 @@
       </template><!-- data table item buttons -->
 
       <!-- Search Fail Warning -->
-      <v-alert slot="no-results" :value="true" color="error" icon="warning">
+      <v-alert
+        slot="no-results"
+        :value="true"
+        color="error"
+        icon="warning"
+      >
         Your search for "{{ search }}" found no results.
       </v-alert><!-- search fail warning -->
 
@@ -71,6 +111,7 @@
     data() {
       return {
         search: '',
+        max25chars: v => v.length <= 25 || 'Input too long!',
         headers: [
           { text: 'Course Title', value: 'title' },
           { text: 'Category', value: 'category' },
@@ -82,10 +123,12 @@
         filterInfo: 'Type to dynamically filter course titles, locations, categories, as well as dates. For dates use numbers (e.g. - 03 for March & 03-08 for 8th of March)',
       };
     },
-
     computed: {
       courses() {
         return this.$store.getters.courses;
+      },
+      localCopy() {
+        return this.courses.map(x => Object.assign({}, x));
       },
       loading() {
         return this.$store.getters.loading;
@@ -102,12 +145,15 @@
         };
         this.$store.dispatch('createCourse', courseData);
       },
+      onUpdateCourse(itemToUpdate) {
+        this.$store.dispatch('updateCourse', itemToUpdate);
+      },
       deleteCourse(id) {
         this.$store.dispatch('deleteCourse', id);
       },
       onCsvUpload(file) {
         // TODO: Trim spaces in incoming file
-        // TODO: Checks
+        // TODO: Data checks
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = () => {
