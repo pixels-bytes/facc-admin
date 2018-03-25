@@ -75,7 +75,7 @@
                 label="Enter New Course Category"
                 v-model="props.item.category"
                 :rules="[max25chars]"
-                @keyup.enter="onUpdateCourse({ id: props.item.id, category: props.item.category}), props.expanded = !props.expanded"
+                @keyup.enter="onUpdateCourse({ id: props.item.id, category: props.item.category }), props.expanded = !props.expanded"
               ></v-text-field>
             </v-edit-dialog>
           </td>

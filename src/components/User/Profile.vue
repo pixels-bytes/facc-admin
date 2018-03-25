@@ -11,11 +11,12 @@
     </v-card-title>
     <!-- title -->
 
-    <!-- Profile -->
     <v-card>
       <v-container fluid grid-list-lg>
-        <v-layout row>
-          <v-flex xs3>
+        <v-layout row wrap>
+
+          <!-- Profile -->
+          <v-flex xs3 offset-xs3>
             <v-card color="secondary" class="white--text">
               <v-card-title primary-title>
                 <h3>Profile</h3>
@@ -27,15 +28,9 @@
                 <v-btn flat dark>Edit</v-btn>
               </v-card-actions>
             </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card><!-- profile -->
+          </v-flex><!-- profile -->
 
-    <!-- Account -->
-    <v-card>
-      <v-container fluid grid-list-lg>
-        <v-layout row>
+          <!-- Account -->
           <v-flex xs3>
             <v-card color="secondary" class="white--text">
               <v-card-title primary-title>
@@ -48,10 +43,10 @@
                 <v-btn flat dark>Edit</v-btn>
               </v-card-actions>
             </v-card>
-          </v-flex>
+          </v-flex><!-- account -->
         </v-layout>
       </v-container>
-    </v-card><!-- account -->
+    </v-card>
 
   </v-card>
 </template>
