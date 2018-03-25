@@ -65,11 +65,38 @@
               ></v-text-field>
             </v-edit-dialog>
           </td>
+          <td>
+            <v-edit-dialog :return-value.sync="props.item.category" lazy>
+              {{ props.item.category }}
+              <v-text-field
+                single-line
+                counter
+                slot="input"
+                label="Enter New Course Category"
+                v-model="props.item.category"
+                :rules="[max25chars]"
+                @keyup.enter="onUpdateCourse({ id: props.item.id, category: props.item.category}), props.expanded = !props.expanded"
+              ></v-text-field>
+            </v-edit-dialog>
+          </td>
 
-          <td>{{ props.item.category }}</td>
           <td>{{ props.item.startDate | date }}</td>
           <td>{{ props.item.endDate | date }}</td>
-          <td>{{ props.item.location }}</td>
+
+          <td>
+            <v-edit-dialog :return-value.sync="props.item.location" lazy>
+              {{ props.item.location }}
+              <v-text-field
+                single-line
+                counter
+                slot="input"
+                label="Enter New Course Location"
+                v-model="props.item.location"
+                :rules="[max25chars]"
+                @keyup.enter="onUpdateCourse({ id: props.item.id, location: props.item.location}), props.expanded = !props.expanded"
+              ></v-text-field>
+            </v-edit-dialog>
+          </td>
         </tr>
       </template><!-- data table items -->
 
