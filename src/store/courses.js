@@ -19,6 +19,9 @@ export default {
     createCourse(state, payload) {
       state.courses.push(payload);
     },
+    updateCourse(state, payload) {
+      state.courses.filter(course => course.id === payload.id)[0] = payload;
+    },
     deleteCourse(state, payload) {
       state.courses = state.courses.filter(course => course.id !== payload);
     },
@@ -67,13 +70,12 @@ export default {
     updateCourse({ commit, getters }, payload) {
       const fetchedCourse = getters.course(payload.id);
       const updatedCourse = { ...fetchedCourse, ...payload };
-      // update firestore here
+
       db
       .collection('courses')
       .doc(payload.id)
       .set(updatedCourse)
-      .then(commit('deleteCourse', payload.id))
-      .then(commit('createCourse', updatedCourse));
+      .then(commit('updateCourse', updatedCourse));
     },
     deleteCourse({ commit }, payload) {
       db
