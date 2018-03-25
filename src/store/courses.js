@@ -68,8 +68,12 @@ export default {
       const fetchedCourse = getters.course(payload.id);
       const updatedCourse = { ...fetchedCourse, ...payload };
       // update firestore here
-      commit('deleteCourse', payload.id);
-      commit('createCourse', updatedCourse);
+      db
+      .collection('courses')
+      .doc(payload.id)
+      .set(updatedCourse)
+      .then(commit('deleteCourse', payload.id))
+      .then(commit('createCourse', updatedCourse));
     },
     deleteCourse({ commit }, payload) {
       db
